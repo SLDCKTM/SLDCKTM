@@ -1,26 +1,188 @@
+<!--
+Single-file portfolio for GitHub Pages
+Filename: index.html
+
+How to use:
+1. Create a new GitHub repository (public or private).
+2. Upload this file as `index.html` in the repository root.
+3. In repo Settings -> Pages, set Source = `main` branch and folder = `/ (root)` (GitHub will publish at https://<username>.github.io/<repo-name>/ )
+
+Quick customization:
+- Edit the `site` object in the <script> block near the bottom to change name, title, intro, projects, contact details.
+- Replace placeholder images/links with your own.
+
+Want a React/Tailwind version or a multi-page site? Reply and I'll generate it.
+-->
+
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#6E56CF" />
-    <meta name="description" content="SLDC Kathmandu — A modern, fully customizable portfolio with dynamic live effects." />
-    <title>SLDC Kathmandu — Portfolio</title>
-    <script>
-      (function() {
-        try {
-          const stored = localStorage.getItem('theme');
-          const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          const theme = stored || (systemDark ? 'dark' : 'light');
-          if (theme === 'dark') document.documentElement.classList.add('dark');
-        } catch (e) {}
-      })();
-    </script>
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio — Your Name</title>
+  <meta name="description" content="Personal portfolio showcasing projects, skills and contact information." />
+  <link rel="icon" href="data:,">
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#98a0b3; --accent:#7c5cff; --glass: rgba(255,255,255,0.04);
+      --radius:14px; --maxw:1000px; --gap:18px; --accent-2:#00d4ff;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:linear-gradient(180deg,#061024 0%, #071426 100%); color:#e6eef8; -webkit-font-smoothing:antialiased}
+    .wrap{max-width:var(--maxw);margin:36px auto;padding:24px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px}
+    nav{display:flex;gap:12px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;padding:8px;border-radius:10px}
+    nav a:hover{color:#fff;background:var(--glass)}
 
-  <body>
-    <div id="root"></div>
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center;margin-top:28px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:var(--radius);box-shadow:0 6px 20px rgba(2,6,23,0.6);}
+    h1{margin:0;font-size:28px}
+    p.lead{color:var(--muted);margin-top:8px;line-height:1.5}
 
-    <script type="module" src="/client/App.tsx"></script>
-  </body>
+    .skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .skill{background:rgba(255,255,255,0.03);padding:8px 10px;border-radius:10px;color:var(--muted);font-size:13px}
+
+    .profile{display:flex;flex-direction:column;align-items:center;text-align:center}
+    .avatar{width:180px;height:180px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:700}
+    .contact{margin-top:12px;display:flex;gap:10px}
+    .btn{padding:10px 14px;border-radius:12px;text-decoration:none;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#071426;font-weight:600}
+
+    .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:22px}
+    .project{padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(0,0,0,0.12), rgba(255,255,255,0.01));}
+    .project h3{margin:0 0 6px 0}
+    .muted{color:var(--muted);font-size:13px}
+
+    footer{margin-top:34px;color:var(--muted);text-align:center;font-size:13px}
+
+    /* responsive */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;}
+      .projects{grid-template-columns:1fr}
+      nav{display:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">YK</div>
+        <div>
+          <div style="font-weight:700">Your Name</div>
+          <div class="muted">Network Admin · DevOps · Cloud</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="card">
+          <h1 id="title">Hi — I'm Your Name.</h1>
+          <p class="lead" id="intro">I build reliable infrastructure, automate boring tasks, and enjoy turning messy networks into predictable systems. I work with Linux, virtualization, firewalls and observability tooling.</p>
+
+          <div id="about" style="margin-top:16px">
+            <h4 style="margin:0 0 8px 0">Selected work</h4>
+            <div class="projects" id="projects">
+              <!-- projects inserted by JS -->
+            </div>
+          </div>
+
+          <div id="skills" style="margin-top:18px">
+            <h4 style="margin:0 0 8px 0">Skills & tools</h4>
+            <div class="skills" id="skills-list">
+              <!-- skills inserted by JS -->
+            </div>
+          </div>
+        </div>
+
+        <aside class="profile card">
+          <div class="avatar" id="avatar">YK</div>
+          <div style="margin-top:12px;font-weight:700">Your Name</div>
+          <div class="muted">Datacenter Technician · Night shifts</div>
+
+          <div class="contact">
+            <a class="btn" href="#contact">Contact</a>
+            <a class="btn" href="#projects" style="background:transparent;color:var(--accent);border:1px solid rgba(255,255,255,0.04)">Resume</a>
+          </div>
+
+          <div style="margin-top:14px;text-align:left;width:100%">
+            <h4 style="margin:6px 0">Quick links</h4>
+            <div class="muted">GitHub · LinkedIn · Blog</div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="contact" style="margin-top:22px">
+        <div class="card">
+          <h3 style="margin-top:0">Get in touch</h3>
+          <p class="muted">I respond fastest to email or GitHub issues.</p>
+          <form onsubmit="event.preventDefault(); sendContact()" style="display:flex;flex-direction:column;gap:8px;margin-top:10px;">
+            <input id="name" placeholder="Your name" style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit" required>
+            <input id="email" placeholder="you@example.com" type="email" style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit" required>
+            <textarea id="message" placeholder="Short message" rows="4" style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit" required></textarea>
+            <div style="display:flex;gap:10px;align-items:center">
+              <button class="btn" type="submit">Send (mailto)</button>
+              <div class="muted" style="font-size:13px">Or open an issue on GitHub</div>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <footer>
+        Built with ❤️ · Hosted on GitHub Pages · Last updated: Sep 10, 2025
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // Edit these values to customize the site quickly
+    const site = {
+      name: 'Your Name',
+      title: 'Datacenter Technician & Network Admin',
+      intro: "I build reliable infrastructure, automate boring tasks, and enjoy turning messy networks into predictable systems.",
+      avatarText: 'YK',
+      skills: ['Linux','Palo Alto','pfSense','Grafana','Zabbix','PowerCLI','Python','Bash','VMware','Automation'],
+      projects: [
+        {title:'Firewall automation',desc:'Automated CPU and threat log extraction & ingestion into internal ERP',link:'#'},
+        {title:'Grafana screenshotter',desc:'Automated downloading of graphs for reports using Selenium',link:'#'},
+        {title:'VM lab deployment',desc:'PowerCLI scripts to create Windows/Ubuntu/RHEL lab VMs',link:'#'}
+      ],
+      contactEmail: 'your.email@example.com'
+    }
+
+    // populate content
+    document.getElementById('title').textContent = `Hi — I'm ${site.name}.`;
+    document.getElementById('intro').textContent = site.intro;
+    document.getElementById('avatar').textContent = site.avatarText;
+
+    const skillsEl = document.getElementById('skills-list');
+    site.skills.forEach(s=>{const d=document.createElement('div');d.className='skill';d.textContent=s;skillsEl.appendChild(d)});
+
+    const projectsEl = document.getElementById('projects');
+    site.projects.forEach(p=>{
+      const d=document.createElement('div');d.className='project';
+      d.innerHTML=`<h3>${p.title}</h3><div class='muted'>${p.desc}</div><div style='margin-top:10px'><a href='${p.link}' class='btn' style='padding:8px 10px;font-size:13px'>View</a></div>`;
+      projectsEl.appendChild(d);
+    });
+
+    function sendContact(){
+      const n=document.getElementById('name').value;
+      const e=document.getElementById('email').value;
+      const m=document.getElementById('message').value;
+      const subj=encodeURIComponent('Portfolio contact from '+n);
+      const body=encodeURIComponent(`Name: ${n}\nEmail: ${e}\n\n${m}`);
+      location.href = `mailto:${site.contactEmail}?subject=${subj}&body=${body}`;
+    }
+  </script>
+</body>
 </html>
